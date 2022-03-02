@@ -7,8 +7,8 @@ import java.util.jar.Attributes
 class History(var name: String?, val list: ArrayList<Int>): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        arrayListOf<Int>().apply { parcel.readArrayList(Int::class.java.classLoader) }
-        //parcel.readArrayList(Int::class.java.classLoader) as ArrayList<Int>
+              //  arrayListOf < Int >().apply { parcel.readArrayList(Int::class.java.classLoader) }
+        parcel.readArrayList(ArrayList::class.java.classLoader) as ArrayList<Int>
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

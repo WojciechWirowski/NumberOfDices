@@ -3,30 +3,29 @@ package com.easv.cse27_b.numberofdices
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
 import android.widget.ListView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.easv.cse27_b.numberofdices.Models.BigHistory
-import com.easv.cse27_b.numberofdices.Models.DiceRecord
 import com.easv.cse27_b.numberofdices.Models.History
 import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity() {
     private var records: MutableList<History> = ArrayList()
-    private var bigHistory: BigHistory = BigHistory()
+    private var bigHistory: BigHistory = MainActivity.bigHistory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
         btnBack.setOnClickListener{back()}
         btnClear.setOnClickListener{clean()}
-        gatherInfo()
+        setList()
+        //gatherInfo()
     }
 
     private fun back(){
@@ -35,26 +34,28 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun clean(){
-        records.clear()
+        bigHistory.list?.clear()
         setList()
     }
 
-    private fun gatherInfo(){
-        val history = intent.getParcelableExtra<History>("history")
-        if (history != null) {
-            records.add(history)
-            println(history.name + history.list)
-        }
-        setList()
-    }
+//    private fun gatherInfo(){
+//        val history = intent.getParcelableExtra<History>("history")
+//        if (history != null) {
+//            records.add(history)
+//            println(history.name + history.list)
+//        }
+//        setList()
+//    }
 
     private fun setList(){
-//        bigHistory.list?.addAll(records)
-//        val adapter = HistoryAdapter(this, bigHistory.list as ArrayList<History>)
-//        lvResultsSecond.adapter = adapter
+        bigHistory.list?.addAll(records)
+        val adapter = HistoryAdapter(this, bigHistory.list as ArrayList<History>)
+        lvResultsSecond.adapter = adapter
     }
 }
+
 internal class HistoryAdapter(context: Context, private val history: ArrayList<History>): ArrayAdapter<History>(context,0,history){
+    @SuppressLint("InflateParams")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var v1: View? = convertView
         if (v1 == null){
@@ -66,13 +67,11 @@ internal class HistoryAdapter(context: Context, private val history: ArrayList<H
         val f = history[position]
 
         val nameView = resView.findViewById<TextView>(R.id.tvName)
-        val listView = resView.findViewById<ListView>(R.id.lvCellList)
+        val listView = resView.findViewById<TextView>(R.id.tvScore)
 
         nameView.text = f.name
+        listView.text = f.list.toString()
 
-        val arrayAdapter: ArrayAdapter<Int> = ArrayAdapter(context, android.R.layout.simple_list_item_1, f.list)
-
-        listView.adapter = arrayAdapter
 
         return resView
     }
