@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
 import com.easv.cse27_b.numberofdices.Models.BigHistory
 import com.easv.cse27_b.numberofdices.Models.History
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun history(){
-        var intent  = Intent(this, SecondActivity::class.java)
+        val intent  = Intent(this, SecondActivity::class.java)
         startActivity(intent)
     }
 

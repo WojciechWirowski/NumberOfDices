@@ -15,13 +15,15 @@
             android:id="@+id/btnHistory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/history" />
+            android:text="@string/history"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/btnRoll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/roll" />
+            android:text="@string/roll"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
     <EditText

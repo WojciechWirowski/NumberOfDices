@@ -8,7 +8,7 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="name"
+        android:text="@string/name"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -16,10 +16,7 @@
         android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score"
+        android:text="@string/score"
         android:textSize="20sp"
         android:textStyle="bold"/>
-
-
-
 </androidx.appcompat.widget.LinearLayoutCompat>
